@@ -1,18 +1,19 @@
 pipeline{
+    agent { docker { image 'maven:3.8.4-openjdk-11-slim' } }
     stages{
-        stage("test"){
+        stage('build'){
             step{
-                sh "echo Testing"
+                echo 'Building ...'
             }
-        },
-        stage("build"){
+        }
+        stage('test'){
             step{
-                sh "echo Building"
+                echo 'Testing ...'
             }
-        },
-        stage("deploy"){
+        }        
+        stage('deploy'){
             step{
-                sh "echo Deploying"
+                echo 'Deploying ...'
             }
         }
     }
