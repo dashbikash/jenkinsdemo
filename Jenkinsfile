@@ -4,19 +4,19 @@ pipeline{
         pollSCM '* * * * *'
     }
     stages{
-        stage('build'){
+        stage('build-package'){
             steps{
                 sh './mvnw clean install'
             }
         }
-        stage('test'){
+        stage('build-image'){
             steps{
-                echo 'Testing ...'
+                sh 'docker build . -t bikashpdash/jenkins-java'
             }
         }        
         stage('deploy'){
             steps{
-                echo 'Deploying ...'
+                sh 'docker run --rm --name jenkins-java -dp 9000:8088 bikashpdash/jenkins-java' 
             }
         }
     }
